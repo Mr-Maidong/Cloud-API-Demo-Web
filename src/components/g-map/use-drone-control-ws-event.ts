@@ -71,8 +71,8 @@ export function useDroneControlWsEvent (sn: string, payloadSn: string, funcs?: U
       }
       case EBizCode.DrcStatusNotify: {
         const { sn: deviceSn, result, message: msg } = payload.data as DrcStatusNotifyMessage
-        // handleProgress(EBizCode.DrcStatusNotify, `device(sn: ${deviceSn}) ${msg}`, result)
-
+        if (deviceSn !== sn) return
+        handleProgress(EBizCode.DrcStatusNotify, `device(sn: ${deviceSn}) ${msg}`, result)
         break
       }
     }
